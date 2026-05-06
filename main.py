@@ -162,36 +162,6 @@ async def delete_webhook(ctx, name: str):
     except Exception as e:
         await ctx.send(f"Error: {e}")
 
-
-@bot.command(name="raw_copy_channels")
-async def raw_copy_channels(ctx):
-    guild = ctx.guild
-    channel_map = {
-        **{
-            category.name: [channel.name for channel in category.channels]
-            for category in guild.categories
-        },
-        "loose": [
-            channel.name
-            for channel in guild.channels
-            if channel.category is None
-            and not isinstance(channel, discord.CategoryChannel)
-        ]
-    }
-    output = ""
-    for key, value in channel_map.items():
-        if key == "loose":
-            output += f"\n **Loose Channels: **\n"
-        else:
-            output += f"\n **{key}:** \n"
-        if value:
-            output += "\n".join(f" |- {ch}" for ch in value)
-        else:
-            output += " (empty)"
-        output += "\n"
-    await ctx.send(output)
-
-
 @bot.command(name="backup")
 async def backup_channels(ctx):
     guild = ctx.guild
