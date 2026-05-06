@@ -26,7 +26,7 @@ async def say(ctx, *, arg: str):
 
 
 @bot.command(name="addrole")
-async def addrole_slash(ctx, member: discord.Member, role: discord.Role):
+async def addrole(ctx, member: discord.Member, role: discord.Role):
     if not ctx.author.guild_permissions.manage_roles:
         return await ctx.send("No permission")
     try:
